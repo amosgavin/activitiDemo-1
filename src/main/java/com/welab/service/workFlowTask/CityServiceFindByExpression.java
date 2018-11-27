@@ -29,6 +29,8 @@ public class CityServiceFindByExpression implements Serializable {
         Long findId = Long.valueOf(findId1);
         City city= cityDao.findById(findId);
         execution.setVariable("findCity", JSON.toJSONString(city));
+        System.out.println("find============="+findId1);
+        System.out.println("find============="+JSON.toJSONString(city));
     }
 
 }

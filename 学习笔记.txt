@@ -9,11 +9,13 @@ A.测试步骤
 	2./activitiDemo/doc/querySql/city.sql初始化业务数据
 	3.执行DefiAndExecWorkFlow.java发布流程（/activitiDemo/src/main/resources/processes/workFlow/SubProcessTwoMethod.bpmn）
 	4.http://127.0.0.1:8081/repository/process-definitions GET请求查看已定义的流程
-	5.http://127.0.0.1:8081/repository/deployments/65001 DELETE请求删除已定义的流程
+	curl -XGET -u admin:admin 'http://127.0.0.1:8081/repository/process-definitions'
+	5.http://127.0.0.1:8081/repository/deployments/10004 DELETE请求删除已定义的流程
+	curl -XDELETE -u admin:admin 'http://127.0.0.1:8081/repository/deployments/10001'
 	6.http://127.0.0.1:8081/runtime/process-instances POST请求发起一个流程 
 		参数Body， JSON(application/json)
 		{
-		   "processDefinitionId":"SubProcessTwoMethod:1:77504",
+		   "processDefinitionId":"SubProcessTwoMethod:1:10004",
 		   "businessKey":"SubProcessTwoMethod",
 		   "variables": [
 		      {
@@ -38,6 +40,8 @@ A.测试步骤
 		      }
 		   ]
 		}
+
+		或者 curl -H "Content-Type:application/json" -XPOST -u admin:admin 'http://127.0.0.1:8081/runtime/process-instances' -d '{"processDefinitionId":"SubProcessTwoMethod:1:15004","businessKey":"SubProcessTwoMethod","variables": [{"name":"findId","value":"1101"},{"name":"updateId","value":"4403"},{"name":"provinceId","value":"44"},{"name":"cityName","value":"深圳市啊"},{"name":"description","value":"工作几年城市"}]}'
 	7.流程正常执行完毕
 B.注意事项
 	1.流程中的变量类型只支持小写，如long，string；错误形式 Long，String

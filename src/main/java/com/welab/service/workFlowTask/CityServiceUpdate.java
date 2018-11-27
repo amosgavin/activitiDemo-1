@@ -2,6 +2,8 @@ package com.welab.service.workFlowTask;
 
 
 import java.io.Serializable;
+
+import com.alibaba.fastjson.JSON;
 import org.activiti.engine.delegate.DelegateExecution;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -31,6 +33,8 @@ public class CityServiceUpdate implements Serializable{
         city.setDescription(description);
         Long l=cityDao.updateCity(city);
         execution.setVariable("updateResult", l);
+        System.out.println("update============="+updateId);
+        System.out.println("find============="+ JSON.toJSONString(l));
     }
 
 }
